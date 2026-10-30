@@ -68,10 +68,10 @@ export default class AlphaGenome extends React.Component<
 
     private rowsForOutputType(outputType: string): AlphaGenomeScore[] {
         const rows = this.props.annotation?.scores ?? [];
-        const typed = rows.filter(row => row.output_type === outputType);
+        const typed = rows.filter((row) => row.output_type === outputType);
         if (this.state.selectedTissue) {
             const match = typed.filter(
-                row => row.ontology_curie === this.state.selectedTissue
+                (row) => row.ontology_curie === this.state.selectedTissue
             );
             if (match.length > 0) {
                 return match;
@@ -82,7 +82,7 @@ export default class AlphaGenome extends React.Component<
 
     private renderBarChart() {
         const rows = (this.props.annotation?.scores ?? []).filter(
-            row => row.output_type === this.state.selectedOutputType
+            (row) => row.output_type === this.state.selectedOutputType
         );
         const byTissue = new Map<string, number>();
         for (const row of rows) {
@@ -149,7 +149,11 @@ export default class AlphaGenome extends React.Component<
 
     public render() {
         const annotation = this.props.annotation;
-        if (!annotation || !annotation.scores || annotation.scores.length === 0) {
+        if (
+            !annotation ||
+            !annotation.scores ||
+            annotation.scores.length === 0
+        ) {
             return <span />;
         }
         const tissues = availableTissues(annotation.scores);
@@ -175,14 +179,14 @@ export default class AlphaGenome extends React.Component<
                             Tissue:{` `}
                             <select
                                 value={this.state.selectedTissue ?? ''}
-                                onChange={e =>
+                                onChange={(e) =>
                                     this.setState({
                                         selectedTissue:
                                             e.target.value || undefined,
                                     })
                                 }
                             >
-                                {tissues.map(curie => (
+                                {tissues.map((curie) => (
                                     <option key={curie} value={curie}>
                                         {curie}
                                     </option>
@@ -202,7 +206,7 @@ export default class AlphaGenome extends React.Component<
                         </tr>
                     </thead>
                     <tbody>
-                        {OUTPUT_TYPES.map(outputType => {
+                        {OUTPUT_TYPES.map((outputType) => {
                             const rows = this.rowsForOutputType(outputType);
                             if (rows.length === 0) {
                                 return null;
@@ -214,10 +218,11 @@ export default class AlphaGenome extends React.Component<
                                     <td>
                                         <a
                                             href="#"
-                                            onClick={e => {
+                                            onClick={(e) => {
                                                 e.preventDefault();
                                                 this.setState({
-                                                    selectedOutputType: outputType,
+                                                    selectedOutputType:
+                                                        outputType,
                                                 });
                                             }}
                                         >
