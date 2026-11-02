@@ -16,7 +16,7 @@ export const DISCLAIMER = 'Model prediction, not experimental evidence.';
 
 /**
  * Default tissue: the ontology_curie of the row with the strongest absolute
- * raw_score. The Variant Page has no study context, so effect size decides.
+ * raw_score
  */
 export function defaultTissue(rows: AlphaGenomeScore[]): string | undefined {
     let best: string | undefined = undefined;
